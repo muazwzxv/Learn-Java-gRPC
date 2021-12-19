@@ -1,0 +1,17 @@
+syntax = "proto3";
+
+// extract a class from the compiled result of protobuf
+// and create a proper class
+option java_multiple_files = true;
+
+// Package for files location
+package common;
+
+// Define the package of the generated class
+option java_package = "com.muazwzxv.models";
+
+message Address {
+  int32 postbox = 1;
+  string street = 2;
+  string city = 3;
+}

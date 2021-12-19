@@ -1,0 +1,36 @@
+syntax = "proto3";
+
+// extract a class from the compiled result of protobuf
+// and create a proper class
+option java_multiple_files = true;
+
+// Define the package of the generated class
+option java_package = "com.muazwzxv.models";
+
+import "common/address.proto";
+import "common/car.proto";
+import "google/protobuf/wrappers.proto";
+
+/**
+  This is my first person proto file
+ */
+//message Person {
+//  string name = 1;
+//  int32 age = 2;
+//  common.Address address = 3;
+//  // Repeated is a list in protobuf
+//  repeated common.Car car = 4;
+//}
+
+/**
+  Using google type wrappers gives more feature
+  compared to the basic scalar type.
+  Advantages include 'has; method
+ */
+message Person {
+  string name = 1;
+  google.protobuf.Int32Value age = 2;
+  common.Address address = 3;
+  // Repeated is a list in protobuf
+  repeated common.Car car = 4;
+}

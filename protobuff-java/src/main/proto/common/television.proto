@@ -1,0 +1,30 @@
+syntax = "proto3";
+
+// extract a class from the compiled result of protobuf
+// and create a proper class
+option java_multiple_files = true;
+
+// Package for files location
+package common;
+
+// Define the package of the generated class
+option java_package = "com.muazwzxv.models";
+
+// v1
+//message Television {
+//  string brand = 1;
+//  int32 year = 2;
+//}
+
+// v2
+message Television {
+  string brand = 1;
+  int32 model = 2;
+  Type type = 3;
+}
+
+enum Type {
+  HD = 0;
+  UHD = 1;
+  OLED = 2;
+}
