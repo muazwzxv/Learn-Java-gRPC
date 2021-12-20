@@ -7,7 +7,7 @@ import "google/protobuf/wrappers.proto";
 
 // Request type
 message BalanceCheckRequest {
-  google.protobuf.Int32Value account_number = 1;
+  int32 account_number = 1;
 }
 
 // Response type

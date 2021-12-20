@@ -12,9 +12,11 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
     public void getBalance(BalanceCheckRequest request, StreamObserver<Balance> responseObserver) {
         // Method return type returns void as we are
         // returning data using the StreamObserver.
-        Int32Value accountNumber = request.getAccountNumber();
+        int accountNumber = request.getAccountNumber();
         Balance balance = Balance.newBuilder()
-                .setAmount(Int32Value.newBuilder().setValue(3000).build())
+                .setAmount(Int32Value.newBuilder()
+                        .setValue(AccountDatabase.getBalance(accountNumber))
+                        .build())
                 .build();
         responseObserver.onNext(balance);
         responseObserver.onCompleted();

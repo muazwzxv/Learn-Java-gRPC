@@ -1,6 +1,5 @@
 package com.muazwzxv.client;
 
-import com.google.protobuf.Int32Value;
 import com.muazwzxv.models.Balance;
 import com.muazwzxv.models.BalanceCheckRequest;
 import com.muazwzxv.models.BankServiceGrpc;
@@ -29,7 +28,7 @@ public class BankClientTest {
     @Test
     public void balanceTest() {
         BalanceCheckRequest balanceCheckRequest = BalanceCheckRequest.newBuilder()
-                .setAccountNumber(Int32Value.newBuilder().setValue(3000).build())
+                .setAccountNumber(2)
                 .build();
         // This line is blocking
         Balance balance = this.blockingStub.getBalance(balanceCheckRequest);
