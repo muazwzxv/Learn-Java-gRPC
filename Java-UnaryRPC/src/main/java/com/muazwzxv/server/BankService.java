@@ -30,7 +30,7 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
         int balance = AccountDatabase.getBalance(accountNumber);
 
         // Error handling gRPC
-        if (amount <= balance) {
+        if (amount > balance) {
             responseObserver.onError(Status.FAILED_PRECONDITION
                     .withDescription("Not Enough Money")
                     .asRuntimeException());
