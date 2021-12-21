@@ -32,7 +32,7 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
         // Error handling gRPC
         if (amount > balance) {
             responseObserver.onError(Status.FAILED_PRECONDITION
-                    .withDescription("Not Enough Money")
+                    .withDescription("Not Enough Money, you only have RM " + balance)
                     .asRuntimeException());
             return;
         }

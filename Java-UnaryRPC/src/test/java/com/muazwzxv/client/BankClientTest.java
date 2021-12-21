@@ -1,5 +1,7 @@
 package com.muazwzxv.client;
 
+import com.google.common.util.concurrent.Uninterruptibles;
+import com.muazwzxv.client.observer.MoneyStreamObserver;
 import com.muazwzxv.models.Balance;
 import com.muazwzxv.models.BalanceCheckRequest;
 import com.muazwzxv.models.BankServiceGrpc;
@@ -10,10 +12,13 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import java.util.concurrent.TimeUnit;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BankClientTest {
 
     private BankServiceGrpc.BankServiceBlockingStub blockingStub;
+    private BankServiceGrpc.BankServiceStub bankServiceStub;
 
     @BeforeAll
     public void setup() {
@@ -24,6 +29,7 @@ public class BankClientTest {
 
         // Blocking stub provides a blocking line of code as it waits for the response
         this.blockingStub = BankServiceGrpc.newBlockingStub(managedChannel);
+        this.bankServiceStub = BankServiceGrpc.newStub(managedChannel);
     }
 
     @Test
@@ -37,7 +43,7 @@ public class BankClientTest {
     }
 
     @Test
-    public void withdrawalTest() {
+    public void withdrawalTestBlocking() {
         WithdrawRequest request = WithdrawRequest.newBuilder().setAccountNumber(7).setAmount(70).build();
 
         try {
@@ -49,5 +55,14 @@ public class BankClientTest {
             System.out.println("Withdraw Amount: RM " + request.getAmount());
             System.out.println(e.getStatus().getDescription());
         }
+    }
+
+    @Test
+    public void withdrawalTestAsync() {
+        WithdrawRequest request = WithdrawRequest.newBuilder().setAccountNumber(7).setAmount(70).build();
+        this.bankServiceStub.withdraw(request, new MoneyStreamObserver());
+
+        // Sleep the program to see the output of the test
+        Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
     }
 }
