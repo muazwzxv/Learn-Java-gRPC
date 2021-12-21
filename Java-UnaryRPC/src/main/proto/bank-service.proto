@@ -9,13 +9,27 @@ import "google/protobuf/wrappers.proto";
 message BalanceCheckRequest {
   int32 account_number = 1;
 }
-
 // Response type
 message Balance {
   google.protobuf.Int32Value amount = 1;
 }
 
+// Request type
+message WithdrawRequest {
+  int32  account_number = 1;
+  // amount to withdraw
+  int32 amount = 2;
+}
+// Response type
+message Money {
+  int32 value = 1;
+}
+
 // Define the service
 service BankService {
+  // unary
   rpc getBalance(BalanceCheckRequest) returns (Balance);
+
+  // Server side streaming
+  rpc withdraw(WithdrawRequest) returns (stream Money);
 }
