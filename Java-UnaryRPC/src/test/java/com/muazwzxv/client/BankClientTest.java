@@ -3,6 +3,7 @@ package com.muazwzxv.client;
 import com.muazwzxv.models.Balance;
 import com.muazwzxv.models.BalanceCheckRequest;
 import com.muazwzxv.models.BankServiceGrpc;
+import com.muazwzxv.models.WithdrawRequest;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import org.junit.jupiter.api.BeforeAll;
@@ -33,5 +34,20 @@ public class BankClientTest {
         // This line is blocking
         Balance balance = this.blockingStub.getBalance(balanceCheckRequest);
         System.out.println("Received: RM " + balance.getAmount());
+    }
+
+    @Test
+    public void withdrawalTest() {
+        WithdrawRequest request = WithdrawRequest.newBuilder().setAccountNumber(7).setAmount(70).build();
+
+        try {
+            this.blockingStub.withdraw(request)
+                    .forEachRemaining(money -> {
+                        System.out.println("Received: RM " + money.getValue());
+                    });
+        } catch (io.grpc.StatusRuntimeException e) {
+            System.out.println("Withdraw Amount: RM " + request.getAmount());
+            System.out.println(e.getStatus().getDescription());
+        }
     }
 }
