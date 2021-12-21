@@ -2,6 +2,7 @@ package com.muazwzxv.server;
 
 import com.google.protobuf.Int32Value;
 import com.muazwzxv.models.*;
+import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
 public class BankService extends BankServiceGrpc.BankServiceImplBase {
@@ -28,10 +29,28 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
         int amount = request.getAmount();
         int balance = AccountDatabase.getBalance(accountNumber);
 
+        // Error handling gRPC
+        if (amount <= balance) {
+            responseObserver.onError(Status.FAILED_PRECONDITION
+                    .withDescription("Not Enough Money")
+                    .asRuntimeException());
+            return;
+        }
+
+
         // Server will stream 10 dollar for each iteration of the loop
         for (int i = 0; i < (amount / 10); i++) {
             Money money = Money.newBuilder().setValue(10).build();
             responseObserver.onNext(money);
+            AccountDatabase.deductBalance(accountNumber, 10);
+
+            // wait 1 second after every loop
+            // Just to demo how streaming works
+//            try {
+//                Thread.sleep(1000);
+//            } catch (InterruptedException e) {
+//                e.printStackTrace();
+//            }
         }
         // Server completed the request
         responseObserver.onCompleted();
