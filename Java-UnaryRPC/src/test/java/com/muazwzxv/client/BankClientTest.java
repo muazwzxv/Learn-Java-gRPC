@@ -1,6 +1,5 @@
 package com.muazwzxv.client;
 
-import com.google.common.util.concurrent.Uninterruptibles;
 import com.muazwzxv.client.observer.MoneyStreamObserver;
 import com.muazwzxv.models.Balance;
 import com.muazwzxv.models.BalanceCheckRequest;
@@ -12,7 +11,7 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
-import java.util.concurrent.TimeUnit;
+import java.util.concurrent.CountDownLatch;
 
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class BankClientTest {
@@ -58,11 +57,13 @@ public class BankClientTest {
     }
 
     @Test
-    public void withdrawalTestAsync() {
+    public void withdrawalTestAsync() throws InterruptedException {
+        CountDownLatch latch = new CountDownLatch(1);
         WithdrawRequest request = WithdrawRequest.newBuilder().setAccountNumber(7).setAmount(70).build();
-        this.bankServiceStub.withdraw(request, new MoneyStreamObserver());
+        this.bankServiceStub.withdraw(request, new MoneyStreamObserver(latch));
+        latch.await();
 
         // Sleep the program to see the output of the test
-        Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
+//        Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
     }
 }
