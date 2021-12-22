@@ -1,7 +1,7 @@
 package com.muazwzxv.client;
 
-import com.muazwzxv.client.observer.BalanceStreamObserver;
-import com.muazwzxv.client.observer.MoneyStreamObserver;
+import com.muazwzxv.client.observer.TestBalanceStreamObserver;
+import com.muazwzxv.client.observer.TestMoneyStreamObserver;
 import com.muazwzxv.models.Balance;
 import com.muazwzxv.models.BalanceCheckRequest;
 import com.muazwzxv.models.BankServiceGrpc;
@@ -61,7 +61,7 @@ public class BankClientTest {
     public void withdrawalTestAsync() throws InterruptedException {
         CountDownLatch latch = new CountDownLatch(1);
         WithdrawRequest request = WithdrawRequest.newBuilder().setAccountNumber(7).setAmount(70).build();
-        this.bankServiceStub.withdraw(request, new MoneyStreamObserver(latch));
+        this.bankServiceStub.withdraw(request, new TestMoneyStreamObserver(latch));
         latch.await();
 
         // Sleep the program to see the output of the test
@@ -70,6 +70,6 @@ public class BankClientTest {
 
     @Test
     public void cashStreamingTest() {
-        this.bankServiceStub.deposit(new BalanceStreamObserver());
+        this.bankServiceStub.deposit(new TestBalanceStreamObserver(new CountDownLatch(1)));
     }
 }

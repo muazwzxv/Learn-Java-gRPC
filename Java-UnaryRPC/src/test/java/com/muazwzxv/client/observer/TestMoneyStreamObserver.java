@@ -5,11 +5,11 @@ import io.grpc.stub.StreamObserver;
 
 import java.util.concurrent.CountDownLatch;
 
-public class MoneyStreamObserver implements StreamObserver<Money> {
+public class TestMoneyStreamObserver implements StreamObserver<Money> {
 
     private final CountDownLatch latch;
 
-    public MoneyStreamObserver(CountDownLatch latch) {
+    public TestMoneyStreamObserver(CountDownLatch latch) {
         this.latch = latch;
     }
 
