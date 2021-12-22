@@ -2,12 +2,10 @@ package com.muazwzxv.client;
 
 import com.muazwzxv.client.observer.TestBalanceStreamObserver;
 import com.muazwzxv.client.observer.TestMoneyStreamObserver;
-import com.muazwzxv.models.Balance;
-import com.muazwzxv.models.BalanceCheckRequest;
-import com.muazwzxv.models.BankServiceGrpc;
-import com.muazwzxv.models.WithdrawRequest;
+import com.muazwzxv.models.*;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.stub.StreamObserver;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -69,7 +67,16 @@ public class BankClientTest {
     }
 
     @Test
-    public void cashStreamingTest() {
-        this.bankServiceStub.deposit(new TestBalanceStreamObserver(new CountDownLatch(1)));
+    public void cashStreamingTest() throws InterruptedException {
+        CountDownLatch latch = new CountDownLatch(1);
+        StreamObserver<DepositRequest> depositStream = this.bankServiceStub.deposit(new TestBalanceStreamObserver(latch));
+
+        for (int i = 0; i < 10; i++) {
+            DepositRequest depositRequest = DepositRequest.newBuilder().setAccountNumber(8).setAmount(10).build();
+            depositStream.onNext(depositRequest);
+        }
+
+        depositStream.onCompleted();
+        latch.await();
     }
 }
