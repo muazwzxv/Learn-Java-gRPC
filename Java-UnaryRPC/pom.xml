@@ -5,7 +5,7 @@
     <modelVersion>4.0.0</modelVersion>
 
     <groupId>org.muazwzxv</groupId>
-    <artifactId>Java-UnaryRPC</artifactId>
+    <artifactId>Java-gRPC-BankService</artifactId>
     <version>1.0-SNAPSHOT</version>
 
     <properties>
