@@ -66,4 +66,9 @@ public class BankClientTest {
         // Sleep the program to see the output of the test
 //        Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
     }
+
+    @Test
+    public void cashStreamingTest() {
+        this.bankServiceStub.deposit()
+    }
 }

@@ -2,6 +2,7 @@ package com.muazwzxv.server;
 
 import com.google.protobuf.Int32Value;
 import com.muazwzxv.models.*;
+import com.muazwzxv.server.observer.CashDepositStreamObserver;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
@@ -54,5 +55,10 @@ public class BankService extends BankServiceGrpc.BankServiceImplBase {
         }
         // Server completed the request
         responseObserver.onCompleted();
+    }
+
+    @Override
+    public StreamObserver<DepositRequest> deposit(StreamObserver<Balance> responseObserver) {
+        return new CashDepositStreamObserver(responseObserver);
     }
 }
