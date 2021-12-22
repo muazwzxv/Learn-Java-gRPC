@@ -1,4 +1,4 @@
-package com.muazwzxv.server;
+package com.muazwzxv.server.store;
 
 import java.util.Map;
 import java.util.function.Function;

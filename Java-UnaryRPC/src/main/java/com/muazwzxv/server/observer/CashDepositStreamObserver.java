@@ -3,7 +3,7 @@ package com.muazwzxv.server.observer;
 import com.google.protobuf.Int32Value;
 import com.muazwzxv.models.Balance;
 import com.muazwzxv.models.DepositRequest;
-import com.muazwzxv.server.AccountDatabase;
+import com.muazwzxv.server.store.AccountDatabase;
 import io.grpc.stub.StreamObserver;
 
 public class CashDepositStreamObserver implements StreamObserver<DepositRequest> {
