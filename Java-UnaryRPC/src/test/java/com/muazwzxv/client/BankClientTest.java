@@ -1,5 +1,6 @@
 package com.muazwzxv.client;
 
+import com.muazwzxv.client.observer.BalanceStreamObserver;
 import com.muazwzxv.client.observer.MoneyStreamObserver;
 import com.muazwzxv.models.Balance;
 import com.muazwzxv.models.BalanceCheckRequest;
@@ -69,6 +70,6 @@ public class BankClientTest {
 
     @Test
     public void cashStreamingTest() {
-        this.bankServiceStub.deposit()
+        this.bankServiceStub.deposit(new BalanceStreamObserver());
     }
 }
