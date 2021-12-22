@@ -29,6 +29,9 @@ public class AccountDatabase {
 
     public static int deductBalance(int accountId, int amount) {
         return STORE.computeIfPresent(accountId, (key, value) -> value - amount);
+    }
 
+    public static void printAccount() {
+        System.out.println(STORE);
     }
 }
