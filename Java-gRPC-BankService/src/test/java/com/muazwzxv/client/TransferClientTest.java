@@ -33,13 +33,15 @@ public class TransferClientTest {
     public void transfer() throws InterruptedException {
         CountDownLatch latch = new CountDownLatch(1);
         TestTransferStreamResponse res = new TestTransferStreamResponse(latch);
+
+        // The server side observer
         StreamObserver<TransferRequest> requestStreamObserver = this.stub.transfer(res);
 
         for (int i = 0; i < 100; i++) {
             TransferRequest transferRequest = TransferRequest.newBuilder()
                     .setFromAccount(ThreadLocalRandom.current().nextInt(1, 11))
                     .setToAccount(ThreadLocalRandom.current().nextInt(1, 11))
-                    .setAmount(40)
+                    .setAmount(10)
                     .build();
             requestStreamObserver.onNext(transferRequest);
         }
