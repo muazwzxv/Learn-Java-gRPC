@@ -24,9 +24,9 @@ public class NginxTestClient {
     @Test
     public void balanceTest() {
 
-        for (int i = 1; i < 10; i++) {
+        for (int i = 1; i < 11; i++) {
             BalanceCheckRequest balanceCheckRequest = BalanceCheckRequest.newBuilder()
-                    .setAccountNumber(1)
+                    .setAccountNumber(i)
                     .build();
             // This line is blocking
             Balance balance = this.bankServiceStub.getBalance(balanceCheckRequest);
