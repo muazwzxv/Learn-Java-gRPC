@@ -8,6 +8,7 @@ import com.muazwzxv.models.WithdrawRequest;
 import io.grpc.Deadline;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
+import io.grpc.StatusRuntimeException;
 import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
@@ -38,11 +39,16 @@ public class DeadlineClientTest {
         BalanceCheckRequest balanceCheckRequest = BalanceCheckRequest.newBuilder()
                 .setAccountNumber(2)
                 .build();
-        // This line is blocking
-        Balance balance = this.blockingStub
-                .withDeadline(Deadline.after(2, TimeUnit.SECONDS))
-                .getBalance(balanceCheckRequest);
-        System.out.println("Received: RM " + balance.getAmount());
+
+        try {
+            // This line is blocking
+            Balance balance = this.blockingStub
+                    .withDeadline(Deadline.after(2, TimeUnit.SECONDS))
+                    .getBalance(balanceCheckRequest);
+            System.out.println("Received: RM " + balance.getAmount());
+        } catch (StatusRuntimeException e) {
+            System.out.println(e.getMessage());
+        }
     }
 
     @Test
