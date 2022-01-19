@@ -23,7 +23,6 @@ public class CashDepositStreamObserver implements StreamObserver<DepositRequest>
         System.out.println(
                 "Received cash deposit for " + accountNumber
         );
-
         this.accountBalance = AccountDatabase.addBalance(accountNumber, amountToDeposit);
     }
 
