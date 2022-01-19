@@ -9,3 +9,9 @@
 - Bi Directional Streaming
 - Error handling
 - Unit testing (blocking and async stub)
+
+### Subsequent to that, i learnt how to
+
+- Write a reverse proxy and load balancing server with nginx (nginx.conf)
+- Setup application and nginx with docker-compose
+- Monitor how nginx direct the traffic to existing server when a service is down

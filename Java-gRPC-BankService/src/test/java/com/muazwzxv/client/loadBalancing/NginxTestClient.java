@@ -9,6 +9,8 @@ import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.Test;
 import org.junit.jupiter.api.TestInstance;
 
+import java.util.concurrent.ThreadLocalRandom;
+
 @TestInstance(TestInstance.Lifecycle.PER_CLASS)
 public class NginxTestClient {
     private BankServiceGrpc.BankServiceBlockingStub bankServiceStub;
@@ -24,9 +26,9 @@ public class NginxTestClient {
     @Test
     public void balanceTest() {
 
-        for (int i = 1; i < 11; i++) {
+        for (int i = 0; i < 100; i++) {
             BalanceCheckRequest balanceCheckRequest = BalanceCheckRequest.newBuilder()
-                    .setAccountNumber(i)
+                    .setAccountNumber(ThreadLocalRandom.current().nextInt(1, 11))
                     .build();
             // This line is blocking
             Balance balance = this.bankServiceStub.getBalance(balanceCheckRequest);
