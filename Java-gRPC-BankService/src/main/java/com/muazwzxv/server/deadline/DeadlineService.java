@@ -5,6 +5,7 @@ import com.google.protobuf.Int32Value;
 import com.muazwzxv.models.*;
 import com.muazwzxv.server.observer.CashDepositStreamObserver;
 import com.muazwzxv.server.store.AccountDatabase;
+import io.grpc.Context;
 import io.grpc.Status;
 import io.grpc.stub.StreamObserver;
 
@@ -33,6 +34,7 @@ public class DeadlineService extends BankServiceGrpc.BankServiceImplBase {
     @Override
     public void withdraw(WithdrawRequest request, StreamObserver<Money> responseObserver) {
         int accountNumber = request.getAccountNumber();
+
         // We assume all amount request are multiple of 10
         // 10 - 20 - 30 - 40
         int amount = request.getAmount();
@@ -50,16 +52,20 @@ public class DeadlineService extends BankServiceGrpc.BankServiceImplBase {
         // Server will stream 10 dollar for each iteration of the loop
         for (int i = 0; i < (amount / 10); i++) {
             Money money = Money.newBuilder().setValue(10).build();
-            responseObserver.onNext(money);
-            AccountDatabase.deductBalance(accountNumber, 10);
 
-            // wait 1 second after every loop
-            // Just to demo how streaming works
-//            try {
-//                Thread.sleep(1000);
-//            } catch (InterruptedException e) {
-//                e.printStackTrace();
-//            }
+            Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
+
+            // Checks the current context whether channel
+            // to a client is still open
+            if (Context.current().isCancelled()) {
+                responseObserver.onNext(money);
+                System.out.println(
+                        "Delivered 10 "
+                );
+                AccountDatabase.deductBalance(accountNumber, 10);
+                continue;
+            }
+            break;
         }
         // Server completed the request
         responseObserver.onCompleted();

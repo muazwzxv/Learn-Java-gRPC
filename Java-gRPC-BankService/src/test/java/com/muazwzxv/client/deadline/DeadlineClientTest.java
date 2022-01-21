@@ -1,5 +1,6 @@
 package com.muazwzxv.client.deadline;
 
+import com.google.common.util.concurrent.Uninterruptibles;
 import com.muazwzxv.client.observer.TestMoneyStreamObserver;
 import com.muazwzxv.models.Balance;
 import com.muazwzxv.models.BalanceCheckRequest;
@@ -56,7 +57,9 @@ public class DeadlineClientTest {
         WithdrawRequest request = WithdrawRequest.newBuilder().setAccountNumber(7).setAmount(70).build();
 
         try {
-            this.blockingStub.withdraw(request)
+            this.blockingStub
+                    .withDeadlineAfter(4, TimeUnit.SECONDS)
+                    .withdraw(request)
                     .forEachRemaining(money -> {
                         System.out.println("Received: RM " + money.getValue());
                     });
@@ -73,7 +76,7 @@ public class DeadlineClientTest {
         this.bankServiceStub.withdraw(request, new TestMoneyStreamObserver(latch));
         latch.await();
 
-        // Sleep the program to see the output of the test
-//        Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
+        //Sleep the program to see the output of the test
+        Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
     }
 }
