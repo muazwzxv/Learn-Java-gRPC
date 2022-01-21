@@ -27,6 +27,8 @@ public class DeadlineClientTest {
     public void setup() {
 
         ManagedChannel managedChannel = ManagedChannelBuilder.forAddress("localhost", 6565)
+                // Interceptor added, all logics prior to request can be coded to an interceptor
+                .intercept(new DeadlineInterceptor())
                 .usePlaintext()
                 .build();
 
@@ -58,7 +60,6 @@ public class DeadlineClientTest {
 
         try {
             this.blockingStub
-                    .withDeadlineAfter(4, TimeUnit.SECONDS)
                     .withdraw(request)
                     .forEachRemaining(money -> {
                         System.out.println("Received: RM " + money.getValue());
