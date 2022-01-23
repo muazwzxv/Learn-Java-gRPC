@@ -6,7 +6,6 @@ import com.muazwzxv.models.Balance;
 import com.muazwzxv.models.BalanceCheckRequest;
 import com.muazwzxv.models.BankServiceGrpc;
 import com.muazwzxv.models.WithdrawRequest;
-import io.grpc.Deadline;
 import io.grpc.ManagedChannel;
 import io.grpc.ManagedChannelBuilder;
 import io.grpc.StatusRuntimeException;
@@ -48,7 +47,6 @@ public class MetadataClientTest {
         try {
             // This line is blocking
             Balance balance = this.blockingStub
-                    .withDeadline(Deadline.after(2, TimeUnit.SECONDS))
                     .getBalance(balanceCheckRequest);
             System.out.println("Received: RM " + balance.getAmount());
         } catch (StatusRuntimeException e) {

@@ -15,7 +15,7 @@ public class AuthInterceptor implements ServerInterceptor {
     }
 
     private boolean validate(String token) {
-        if (Objects.nonNull(token) && token.equals("bank-client-secret"))
+        if (Objects.nonNull(token) && token.equals("Bank-Client-Secret"))
             return true;
 
         return false;
