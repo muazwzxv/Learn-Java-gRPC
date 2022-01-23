@@ -11,7 +11,14 @@ public class AuthInterceptor implements ServerInterceptor {
         if (!validate(clientToken))
             serverCall.close(Status.UNAUTHENTICATED.withDescription("Invalid token"), metadata);
 
-        return serverCallHandler.startCall(serverCall, metadata);
+        UserRole userRole = this.extractUserRole(clientToken);
+        // Store user Role in ctx
+        Context ctx = Context.current().withValue(
+                ServerConstant.getCtxUserRole(),
+                userRole
+        );
+        return Contexts.interceptCall(ctx, serverCall, metadata, serverCallHandler);
+//        return serverCallHandler.startCall(serverCall, metadata);
     }
 
     private boolean validate(String token) {
@@ -19,5 +26,9 @@ public class AuthInterceptor implements ServerInterceptor {
             return true;
 
         return false;
+    }
+
+    private UserRole extractUserRole(String token) {
+        return token.endsWith("prime") ? UserRole.PRIME_USER : UserRole.REGULAR_USER;
     }
 }
