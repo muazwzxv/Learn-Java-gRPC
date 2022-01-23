@@ -47,6 +47,7 @@ public class MetadataClientTest {
         try {
             // This line is blocking
             Balance balance = this.blockingStub
+                    .withCallCredentials(new UserSessionToken("User-Secret"))
                     .getBalance(balanceCheckRequest);
             System.out.println("Received: RM " + balance.getAmount());
         } catch (StatusRuntimeException e) {

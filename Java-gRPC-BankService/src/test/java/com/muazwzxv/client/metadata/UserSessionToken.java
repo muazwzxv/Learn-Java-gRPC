@@ -2,7 +2,6 @@ package com.muazwzxv.client.metadata;
 
 import io.grpc.CallCredentials;
 import io.grpc.Metadata;
-import io.grpc.Status;
 
 import java.util.concurrent.Executor;
 
@@ -23,7 +22,7 @@ public class UserSessionToken extends CallCredentials {
             data.put(ClientConstant.USER_TOKEN, this.jwt);
 
             metadataApplier.apply(data);
-            metadataApplier.fail(Status.UNAVAILABLE);
+//            metadataApplier.fail(Status.UNAVAILABLE);
         });
     }
 
