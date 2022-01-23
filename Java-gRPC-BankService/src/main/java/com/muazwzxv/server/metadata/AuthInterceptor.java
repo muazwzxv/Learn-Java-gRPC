@@ -7,7 +7,7 @@ import java.util.Objects;
 public class AuthInterceptor implements ServerInterceptor {
     @Override
     public <ReqT, RespT> ServerCall.Listener<ReqT> interceptCall(ServerCall<ReqT, RespT> serverCall, Metadata metadata, ServerCallHandler<ReqT, RespT> serverCallHandler) {
-        String clientToken = metadata.get(ServerConstant.getServerToken());
+        String clientToken = metadata.get(ServerConstant.getUserToken());
         if (!validate(clientToken))
             serverCall.close(Status.UNAUTHENTICATED.withDescription("Invalid token"), metadata);
 
@@ -15,7 +15,7 @@ public class AuthInterceptor implements ServerInterceptor {
     }
 
     private boolean validate(String token) {
-        if (Objects.nonNull(token) && token.equals("Bank-Client-Secret"))
+        if (Objects.nonNull(token) && token.equals("User-Secret-test"))
             return true;
 
         return false;
