@@ -61,9 +61,6 @@ public class BankClientTest {
         WithdrawRequest request = WithdrawRequest.newBuilder().setAccountNumber(7).setAmount(70).build();
         this.bankServiceStub.withdraw(request, new TestMoneyStreamObserver(latch));
         latch.await();
-
-        // Sleep the program to see the output of the test
-//        Uninterruptibles.sleepUninterruptibly(3, TimeUnit.SECONDS);
     }
 
     @Test
