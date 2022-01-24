@@ -18,12 +18,20 @@ public class MetadataService extends BankServiceGrpc.BankServiceImplBase {
         // Method return type returns void as we are
         // returning data using the StreamObserver.
         int accountNumber = request.getAccountNumber();
+
+        UserRole role = ServerConstant.getCtxUserRole().get();
+
+        if (UserRole.PRIME_USER.equals(role)) {
+            System.out.println("User is a Prime user");
+        } else {
+            System.out.println("User is Regular user");
+        }
+
         Balance balance = Balance.newBuilder()
                 .setAmount(Int32Value.newBuilder()
                         .setValue(AccountDatabase.getBalance(accountNumber))
                         .build())
                 .build();
-
 
         responseObserver.onNext(balance);
         responseObserver.onCompleted();
