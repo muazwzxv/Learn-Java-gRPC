@@ -7,6 +7,7 @@
         <module>Proto</module>
         <module>User-Service</module>
         <module>Movie-Service</module>
+        <module>Aggregator-Service</module>
     </modules>
     <parent>
         <groupId>org.springframework.boot</groupId>
