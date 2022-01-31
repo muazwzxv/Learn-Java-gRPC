@@ -1,0 +1,16 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.muazwzxv.Spring-gRPC";
+
+import "common.proto";
+
+message UserSearchRequest {
+  string login_id = 1;
+}
+
+message UserResponse {
+  string id = 1;
+  string name = 2;
+  Genre genre = 3;
+}

@@ -1,0 +1,12 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.muazwzxv.Spring-gRPC.services";
+
+
+enum Genre {
+  DRAMA = 0;
+  ACTION = 1;
+  THRILLER = 2;
+  CRIME = 3;
+}

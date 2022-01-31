@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+option java_multiple_files = true;
+option java_package = "com.muazwzxv.Spring-gRPC.services";
+
+import "google/protobuf/wrappers.proto";
+import "common.proto";
+
+
+message MovieDTO{
+  string title = 1;
+  google.protobuf.Int32Value year = 2;
+  double rating = 3;
+}
+
+message MovieSearchRequest {
+  Genre genre = 1;
+}
+
+message MovieSearchResponse {
+  repeated MovieDTO movies = 1;
+}
+
+service MovieService {
+  rpc getMovies(MovieSearchRequest) returns (MovieSearchResponse);
+}
