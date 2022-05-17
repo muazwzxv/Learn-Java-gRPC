@@ -1,6 +1,7 @@
 package sample
 
 import (
+	"github.com/google/uuid"
 	"math/rand"
 	"simpleTutorial/pb/simpleTutorial"
 )
@@ -99,5 +100,24 @@ func randomScreenResolution() *simpleTutorial.Screen_Resolution {
 	return &simpleTutorial.Screen_Resolution{
 		Height: uint32(height),
 		Width:  uint32(width),
+	}
+}
+
+func randomID() string {
+	return uuid.New().String()
+}
+
+func randomLaptopBrand() string {
+	return randomStringFromSet("Dell", "Apple", "Lenovo")
+}
+
+func randomLaptopName(brand string) string {
+	switch brand {
+	case "Dell":
+		return randomStringFromSet("XPS 15", "XPS 13", "XPS 17")
+	case "Apple":
+		return randomStringFromSet("Macbook Air", "Macbook Pro 14", "Macbook Pro 16")
+	default:
+		return randomStringFromSet("Thinkdpad 13", "Thinkpad 15")
 	}
 }

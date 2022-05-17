@@ -1,7 +1,9 @@
 package sample
 
 import (
+	"google.golang.org/protobuf/types/known/timestamppb"
 	"simpleTutorial/pb/simpleTutorial"
+	"time"
 )
 
 func NewKeyboard() *simpleTutorial.Keyboard {
@@ -85,5 +87,28 @@ func NewScreen() *simpleTutorial.Screen {
 		Resolution: randomScreenResolution(),
 		Panel:      randomScreenPanel(),
 		MultiTouch: randomBool(),
+	}
+}
+
+func NewLaptop() *simpleTutorial.Laptop {
+	brand := randomLaptopBrand()
+	name := randomLaptopName(brand)
+
+	return &simpleTutorial.Laptop{
+		Id:       randomID(),
+		Screen:   NewScreen(),
+		Brand:    brand,
+		Name:     name,
+		Cpu:      NewCPU(),
+		Ram:      NewRAM(),
+		Gpus:     []*simpleTutorial.GPU{NewGPU()},
+		Storages: []*simpleTutorial.Storage{NewSSD(), NewHDD()},
+		Keyboard: NewKeyboard(),
+		Weight: &simpleTutorial.Laptop_WeightKg{
+			WeightKg: randomFloat64(1.0, 3.0),
+		},
+		PriceUsd:    randomFloat64(1500, 3000),
+		ReleaseYear: uint32(randomFloat64(2015, 2022)),
+		UpdatedAt:   timestamppb.New(time.Now()),
 	}
 }
