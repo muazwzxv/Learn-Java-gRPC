@@ -4,7 +4,12 @@ import (
 	"github.com/google/uuid"
 	"math/rand"
 	"simpleTutorial/pb/simpleTutorial"
+	"time"
 )
+
+func init() {
+	rand.Seed(time.Now().UnixNano())
+}
 
 func randomLayoutKeyboard() simpleTutorial.Keyboard_Layout {
 	switch rand.Intn(3) {

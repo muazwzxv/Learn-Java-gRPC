@@ -1,0 +1,62 @@
+{
+ "id": "5a76bfa6-0a12-4265-b30e-e99681b0d526",
+ "brand": "Lenovo",
+ "name": "Thinkdpad 13",
+ "cpu": {
+  "brand": "Intel",
+  "name": "Core i7-9750H",
+  "num_core": 7,
+  "num_threads": 10,
+  "min_ghz": 3.2810156453834267,
+  "max_ghz": 4.199310567828523
+ },
+ "ram": {
+  "value": "3",
+  "unit": "GIGABYTE"
+ },
+ "gpus": [
+  {
+   "brand": "NVIDIA",
+   "name": "RTX 2070",
+   "min_ghz": 1.0144541972948677,
+   "max_ghz": 1.3877349184188534,
+   "memory": {
+    "value": "6",
+    "unit": "GIGABYTE"
+   }
+  }
+ ],
+ "storages": [
+  {
+   "driver": "SSD",
+   "memory": {
+    "value": "340",
+    "unit": "GIGABYTE"
+   }
+  },
+  {
+   "driver": "HDD",
+   "memory": {
+    "value": "6",
+    "unit": "TERABYTE"
+   }
+  }
+ ],
+ "screen": {
+  "size_inch": 14.2171,
+  "resolution": {
+   "width": 1507,
+   "height": 1506
+  },
+  "panel": "IPS",
+  "multiTouch": false
+ },
+ "keyboard": {
+  "layout": "AZERTY",
+  "backlit": true
+ },
+ "weight_kg": 1.396415187148902,
+ "price_usd": 2255.810130248941,
+ "release_year": 2017,
+ "updated_at": "2022-05-20T14:55:29.962071558Z"
+}

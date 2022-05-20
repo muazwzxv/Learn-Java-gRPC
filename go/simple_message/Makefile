@@ -4,3 +4,5 @@ clean:
 	rm ./pb/simpleTutorial/*.go
 run:
 	go run main.gear
+test:
+	go test -cover -race ./...

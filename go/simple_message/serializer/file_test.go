@@ -30,3 +30,13 @@ func TestReadFileSerializer(t *testing.T) {
 
 	log.Printf("read from binary file: %v", laptop)
 }
+
+func TestWriteToJson(t *testing.T) {
+	t.Parallel()
+
+	jsonFile := "../tmp/laptop.json"
+	laptop := sample.NewLaptop()
+
+	err := WriteProtoToJson(laptop, jsonFile)
+	require.NoError(t, err)
+}
