@@ -14,8 +14,8 @@ type LaptopServer struct {
 	Store LaptopStore
 }
 
-func NewLaptopServer() *LaptopServer {
-	return &LaptopServer{}
+func NewLaptopServer(store LaptopStore) *LaptopServer {
+	return &LaptopServer{store}
 }
 
 func (server *LaptopServer) CreateLaptop(ctx context.Context, req *simpleTutorial.CreateLaptopRequest) (*simpleTutorial.CreateLaptopResponse, error) {
@@ -41,7 +41,7 @@ func (server *LaptopServer) CreateLaptop(ctx context.Context, req *simpleTutoria
 		if errors.Is(err, ErrAlreadyExists) {
 			code = codes.AlreadyExists
 		}
-		return nil, status.Errorf(code, "cannot save laptop: %w", err)
+		return nil, status.Errorf(code, "cannot save laptop: %v", err)
 	}
 
 	log.Printf("laptop saved successfully: %s", laptop)

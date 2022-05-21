@@ -112,3 +112,25 @@ func NewLaptop() *simpleTutorial.Laptop {
 		UpdatedAt:   timestamppb.New(time.Now()),
 	}
 }
+
+func NewLaptopNoID() *simpleTutorial.Laptop {
+	brand := randomLaptopBrand()
+	name := randomLaptopName(brand)
+
+	return &simpleTutorial.Laptop{
+		Screen:   NewScreen(),
+		Brand:    brand,
+		Name:     name,
+		Cpu:      NewCPU(),
+		Ram:      NewRAM(),
+		Gpus:     []*simpleTutorial.GPU{NewGPU()},
+		Storages: []*simpleTutorial.Storage{NewSSD(), NewHDD()},
+		Keyboard: NewKeyboard(),
+		Weight: &simpleTutorial.Laptop_WeightKg{
+			WeightKg: randomFloat64(1.0, 3.0),
+		},
+		PriceUsd:    randomFloat64(1500, 3000),
+		ReleaseYear: uint32(randomFloat64(2015, 2022)),
+		UpdatedAt:   timestamppb.New(time.Now()),
+	}
+}

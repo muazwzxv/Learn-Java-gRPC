@@ -1,27 +1,27 @@
 {
- "id": "5a76bfa6-0a12-4265-b30e-e99681b0d526",
+ "id": "1e01ff5f-767e-4f88-acf6-0fddec959cfb",
  "brand": "Lenovo",
  "name": "Thinkdpad 13",
  "cpu": {
   "brand": "Intel",
-  "name": "Core i7-9750H",
-  "num_core": 7,
-  "num_threads": 10,
-  "min_ghz": 3.2810156453834267,
-  "max_ghz": 4.199310567828523
+  "name": "Core i3-1005G1",
+  "num_core": 6,
+  "num_threads": 12,
+  "min_ghz": 2.913498365947551,
+  "max_ghz": 4.835840462712435
  },
  "ram": {
-  "value": "3",
+  "value": "4",
   "unit": "GIGABYTE"
  },
  "gpus": [
   {
-   "brand": "NVIDIA",
-   "name": "RTX 2070",
-   "min_ghz": 1.0144541972948677,
-   "max_ghz": 1.3877349184188534,
+   "brand": "AMD",
+   "name": "RX 580",
+   "min_ghz": 1.0907599633593121,
+   "max_ghz": 1.7650594065520928,
    "memory": {
-    "value": "6",
+    "value": "2",
     "unit": "GIGABYTE"
    }
   }
@@ -30,33 +30,33 @@
   {
    "driver": "SSD",
    "memory": {
-    "value": "340",
+    "value": "619",
     "unit": "GIGABYTE"
    }
   },
   {
    "driver": "HDD",
    "memory": {
-    "value": "6",
+    "value": "4",
     "unit": "TERABYTE"
    }
   }
  ],
  "screen": {
-  "size_inch": 14.2171,
+  "size_inch": 14.285703,
   "resolution": {
-   "width": 1507,
-   "height": 1506
+   "width": 3283,
+   "height": 3282
   },
   "panel": "IPS",
-  "multiTouch": false
+  "multiTouch": true
  },
  "keyboard": {
-  "layout": "AZERTY",
-  "backlit": true
+  "layout": "QWERTZ",
+  "backlit": false
  },
- "weight_kg": 1.396415187148902,
- "price_usd": 2255.810130248941,
- "release_year": 2017,
- "updated_at": "2022-05-20T14:55:29.962071558Z"
+ "weight_kg": 1.12763937339934,
+ "price_usd": 2763.208954364187,
+ "release_year": 2016,
+ "updated_at": "2022-05-21T17:02:50.550771650Z"
 }
