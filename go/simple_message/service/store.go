@@ -12,7 +12,7 @@ var ErrAlreadyExists = errors.New("records already exist")
 
 type LaptopStore interface {
 	Save(laptop *simpleTutorial.Laptop) error
-	Find(id string) (simpleTutorial.Laptop, error)
+	Find(id string) (*simpleTutorial.Laptop, error)
 }
 
 type InMemoryLaptopStore struct {

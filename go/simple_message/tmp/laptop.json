@@ -1,27 +1,27 @@
 {
- "id": "1e01ff5f-767e-4f88-acf6-0fddec959cfb",
+ "id": "a82bddcb-5529-43f7-ac8a-dd686b402edb",
  "brand": "Lenovo",
- "name": "Thinkdpad 13",
+ "name": "Thinkpad 15",
  "cpu": {
   "brand": "Intel",
   "name": "Core i3-1005G1",
-  "num_core": 6,
-  "num_threads": 12,
-  "min_ghz": 2.913498365947551,
-  "max_ghz": 4.835840462712435
+  "num_core": 5,
+  "num_threads": 6,
+  "min_ghz": 3.1587680940281846,
+  "max_ghz": 3.931217162011485
  },
  "ram": {
-  "value": "4",
+  "value": "6",
   "unit": "GIGABYTE"
  },
  "gpus": [
   {
-   "brand": "AMD",
-   "name": "RX 580",
-   "min_ghz": 1.0907599633593121,
-   "max_ghz": 1.7650594065520928,
+   "brand": "NVIDIA",
+   "name": "RTX 2080",
+   "min_ghz": 1.4952350947630269,
+   "max_ghz": 1.8913226945919146,
    "memory": {
-    "value": "2",
+    "value": "6",
     "unit": "GIGABYTE"
    }
   }
@@ -30,33 +30,33 @@
   {
    "driver": "SSD",
    "memory": {
-    "value": "619",
+    "value": "127",
     "unit": "GIGABYTE"
    }
   },
   {
    "driver": "HDD",
    "memory": {
-    "value": "4",
+    "value": "2",
     "unit": "TERABYTE"
    }
   }
  ],
  "screen": {
-  "size_inch": 14.285703,
+  "size_inch": 13.491665,
   "resolution": {
-   "width": 3283,
-   "height": 3282
+   "width": 3836,
+   "height": 3835
   },
-  "panel": "IPS",
+  "panel": "OLED",
   "multiTouch": true
  },
  "keyboard": {
   "layout": "QWERTZ",
-  "backlit": false
+  "backlit": true
  },
- "weight_kg": 1.12763937339934,
- "price_usd": 2763.208954364187,
+ "weight_kg": 2.736244027062298,
+ "price_usd": 2527.1649937362927,
  "release_year": 2016,
- "updated_at": "2022-05-21T17:02:50.550771650Z"
+ "updated_at": "2022-05-22T08:19:40.193400814Z"
 }

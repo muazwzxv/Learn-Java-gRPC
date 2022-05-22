@@ -11,11 +11,12 @@ import (
 )
 
 type LaptopServer struct {
+	simpleTutorial.UnimplementedLaptopServiceServer
 	Store LaptopStore
 }
 
 func NewLaptopServer(store LaptopStore) *LaptopServer {
-	return &LaptopServer{store}
+	return &LaptopServer{Store: store}
 }
 
 func (server *LaptopServer) CreateLaptop(ctx context.Context, req *simpleTutorial.CreateLaptopRequest) (*simpleTutorial.CreateLaptopResponse, error) {

@@ -29,6 +29,11 @@ func TestClientCreateLaptop(t *testing.T) {
 	require.Equal(t, expectedId, res.Id)
 
 	// check that laptop is stored
+
+	data, err := server.Store.Find(res.Id)
+	require.NoError(t, err)
+	require.NotNil(t, data)
+	require.Equal(t, expectedId, data.Id)
 }
 
 func startTestLaptopServer(t *testing.T) (*LaptopServer, string) {
